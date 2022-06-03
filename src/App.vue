@@ -44,14 +44,20 @@ export default {
             resolve();
           } else {
             callback("自定义校验：请使用字母A作为开头");
-            reject("自定义校验：请使用字母A作为开头");
+            reject();
           }
         }, 100);
       });
     },
     handleSubmit(e) {
       e.preventDefault();
-      this.form.validateFields();
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log(values);
+        } else {
+          console.log("校验失败，原因：", err);
+        }
+      });
     },
   },
 };
